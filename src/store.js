@@ -18,9 +18,27 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-
+    ADD_LINK: (state, link) => {
+      state.links.push(link)
+    },
+    REMOVE_LINK: (state, link) => {
+      state.links.splice(link, 1)
+    },
+    REMOVE_ALL_LINKS: (state) => {
+      state.links = []
+    }
   },
   actions: {
-
+    removeLink: (context, link) => {
+      context.commit('REMOVE_LINK', link)
+    },
+    removeAll ({ commit }) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          commit('REMOVE_ALL_LINKS')
+          resolve()
+        }, 1500)
+      })
+    }
   }
 })
